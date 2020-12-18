@@ -2,7 +2,7 @@ import React from "react";
 
 export const Launch = (props) => {
   const { launch } = props;
-  const moment = require('moment');
+  const moment = require("moment");
   const rocket = "🚀";
   return (
     <div className="launch-card">
@@ -18,20 +18,24 @@ export const Launch = (props) => {
           <h2> {`${rocket} ${launch.name}`} </h2>
         </div>
         <div className="card-description">
-          {
-            launch.details ?
-              (<p><b>Details: </b> {launch.details}</p>)
-              :
-              (<p><b>Details: </b> None</p>)
-            
-          }
-          <p><b>Launch date:</b> {moment.utc(launch.date_utc).format('DD/MM/YYYY') }</p>
-          <p><b>Launch time:</b> {moment.utc(launch.date_utc).format('hh:mm A') }</p>
+          {launch.details ? (
+            <p>
+              <b>Details: </b> {launch.details}
+            </p>
+          ) : (
+            <p>
+              <b>Details: </b> None
+            </p>
+          )}
+          <p>
+            <b>Launch date:</b>{" "}
+            {moment.utc(launch.date_utc).format("DD/MM/YYYY")}
+          </p>
+          <p>
+            <b>Launch time:</b> {moment.utc(launch.date_utc).format("hh:mm A")}
+          </p>
           <div className="launch-link-container">
-            <a 
-              href={launch.links.webcast}
-              target="#"
-            >
+            <a href={launch.links.webcast} target="#">
               Go to video
             </a>
           </div>
