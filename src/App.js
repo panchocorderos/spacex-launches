@@ -4,7 +4,9 @@ import useLaunches from "./hooks/useLaunches";
 import { Launch } from "./components/Launch";
 
 function App() {
-  const { launches } = useLaunches();
+  const { launches, pages, maxPages } = useLaunches();
+
+  console.log({ launches, pages, maxPages });
 
   return (
     <div className="App">
