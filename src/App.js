@@ -1,10 +1,12 @@
 import "./styles.css";
+import "./App.css"
 import { Navbar } from "./components/Navbar";
 import useLaunches from "./hooks/useLaunches";
 import { Launch } from "./components/Launch";
 import { useState } from "react";
 import { Pagination } from "./components/Pagination";
 import { Footer } from "./components/Footer";
+import { Searchbar } from "./components/Searchbar";
 
 function App() {
   const { launches, pages, maxPages } = useLaunches();
@@ -20,18 +22,19 @@ function App() {
     setCurrentPage(previousPage);
   };
 
+  const onSearch = (launchName) => {
+    const result = launches.find((launch => launch.name === launchName));
+    if (!result) {
+
+    }
+    console.log(result);
+  } 
+
   return (
     <div className="App">
       <Navbar />
       <div className="header">
-        <div className="searchbar-container">
-          <div className="searchbar">
-            <input placeholder="Search launch..." />
-          </div>
-          <div className="searchbar-btn">
-            <button>🔍</button>
-          </div>
-        </div>
+        <Searchbar onSearch={onSearch} />
         <Pagination
           currentPage={currentPage + 1}
           maxPages={maxPages}

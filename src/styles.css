@@ -83,15 +83,16 @@ a:visited {
 }
 
 a:hover{
-  color:blanchedalmond;
+  color: grey;
 }
 
 
 .launch-card {
   display: flex;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 3px;
+  box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
   padding: 16px;
+  margin: 8px;
 }
 
 .launch-path {
@@ -116,6 +117,9 @@ a:hover{
 }
 
 .launches-grid {
+  margin: auto;
+  width: 75%;
+  padding: 16px;
   display: grid;
   grid-template-columns: repeat(1, 3fr);
   grid-gap: 18px;
@@ -143,6 +147,14 @@ footer p a:link {
   color: white;
 }
 
-a:visited {
+footer p a:visited {
   color: white;
+}
+
+@media screen and (max-width: 600px) {
+  
+  .patch-img {
+    width: 150px;
+    height: 150px;
+  }
 }
