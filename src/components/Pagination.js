@@ -13,7 +13,7 @@ export const Pagination = (props) => {
         </button>
         <div className="pagination-page">
           <span className="current-page">
-            {currentPage} de {maxPages}{" "}
+            {currentPage} of {maxPages}{" "}
           </span>
         </div>
         <button className="pagination-btn" onClick={onRightClick}>
