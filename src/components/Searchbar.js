@@ -7,7 +7,7 @@ export const Searchbar = (props) => {
   const onChangeInput = (event) => {
     setSearch(event.target.value);
     if (event.target.value.length === 0) {
-      onSearch(null);
+      onSearch("");
     }
   };
 
