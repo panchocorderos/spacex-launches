@@ -2,33 +2,14 @@ import "./styles.css";
 import { Navbar } from "./components/Navbar";
 import useLaunches from "./hooks/useLaunches";
 import { Launch } from "./components/Launch";
-import { useState } from "react";
+
 import { Pagination } from "./components/Pagination";
 import { Footer } from "./components/Footer";
 import { Searchbar } from "./components/Searchbar";
 
 function App() {
-  const { launches, pages, maxPages } = useLaunches();
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const nextPage = () => {
-    const nextPage = Math.min(currentPage + 1, maxPages - 1);
-    setCurrentPage(nextPage);
-  };
-
-  const previousPage = () => {
-    const previousPage = Math.max(currentPage - 1, 0);
-    setCurrentPage(previousPage);
-  };
-
-  const onSearch = (launchName) => {
-    const result = launches.find((launch => launch.name === launchName));
-    if (!result) {
-
-    }
-    console.log(result);
-  } 
-
+  const { pages, maxPages, onSearch, nextPage, previousPage, currentPage } = useLaunches();
+  
   return (
     <div className="App">
       <Navbar />
@@ -49,6 +30,8 @@ function App() {
             </div>
           );
         })
+      ) : pages.length === 0 ? (
+        <div>Not found</div>
       ) : (
         <div>Loading launches... </div>
       )}
