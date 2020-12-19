@@ -1,5 +1,4 @@
 import "./styles.css";
-import "./App.css"
 import { Navbar } from "./components/Navbar";
 import useLaunches from "./hooks/useLaunches";
 import { Launch } from "./components/Launch";
