@@ -1,42 +1,22 @@
 import "./styles.css";
 import { Navbar } from "./components/Navbar";
-import useLaunches from "./hooks/useLaunches";
-import { Launch } from "./components/Launch";
-
-import { Pagination } from "./components/Pagination";
 import { Footer } from "./components/Footer";
-import { Searchbar } from "./components/Searchbar";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Home } from "./views/Home";
+import { Launches } from "./views/Launches";
+import { LaunchDetails } from "./components/LaunchDetails";
 
 function App() {
-  const { pages, maxPages, onSearch, nextPage, previousPage, currentPage } = useLaunches();
-  
   return (
-    <div className="App">
-      <Navbar />
-      <div className="header">
-        <Searchbar onSearch={onSearch} />
-        <Pagination
-          currentPage={currentPage + 1}
-          maxPages={maxPages}
-          onRightClick={nextPage}
-          onLeftClick={previousPage}
-        />
+    <Router>
+      <div>
+        <Navbar />
+        <Route path="/" exact component={Home} />
+        <Route path="/launches" exact component={Launches} />
+        <Route path="/launches/:id" exact component={LaunchDetails}/>
+        <Footer />
       </div>
-      {pages[currentPage] ? (
-        pages[currentPage].map((launch) => {
-          return (
-            <div className="launches-grid">
-              <Launch key={launch.name} launch={launch} />
-            </div>
-          );
-        })
-      ) : pages.length === 0 ? (
-        <div>Not found</div>
-      ) : (
-        <div>Loading launches... </div>
-      )}
-      <Footer />
-    </div>
+    </Router>
   );
 }
 
