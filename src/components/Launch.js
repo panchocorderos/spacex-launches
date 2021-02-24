@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+import { getDate, getTime} from '../service/date'
 
 export const Launch = (props) => {
-  const { launch } = props;
-  const moment = require("moment");
+  const { launch } = props;  
   const rocket = "🚀";
+  
   return (
     <div className="launch-card">
       <div className="launch-path">
@@ -15,7 +17,9 @@ export const Launch = (props) => {
       </div>
       <div className="card-body">
         <div className="card-top">
-          <h2> {`${rocket} ${launch.name}`} </h2>
+          <Link to={`/launches/${launch.flight_number}`}>
+            {`${rocket} ${launch.name}`}
+          </Link>
         </div>
         <div className="card-description">
           {launch.details ? (
@@ -28,11 +32,11 @@ export const Launch = (props) => {
             </p>
           )}
           <p>
-            <b>Launch date:</b>{" "}
-            {moment.utc(launch.date_utc).format("DD/MM/YYYY")}
+            <b>Launch date:</b>
+            {" " + getDate(launch.date_utc)}
           </p>
           <p>
-            <b>Launch time:</b> {moment.utc(launch.date_utc).format("hh:mm A")}
+            <b>Launch time:</b> {getTime(launch.date_utc)}
           </p>
           <div className="launch-link-container">
             <a href={launch.links.webcast} target="#">

@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+
 
 export const Navbar = () => {
   return (
@@ -7,7 +9,8 @@ export const Navbar = () => {
         <img className="logo" alt="spaceX-logo" src="/assets/spacex.png" />
       </a>
       <div>
-        <h1>SpaceX - Launches 🚀</h1>
+        <Link className="navbar-link" to="/">Home</Link>
+        <Link className="navbar-link" to="/launches">Launches</Link>
       </div>
     </nav>
   );

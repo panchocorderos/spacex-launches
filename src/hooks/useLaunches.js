@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-
+import { getLaunch } from "../service/launch";
 import { getLaunches } from "../service/launches";
 
 const splitLaunchesOnPages = (launches) => {
@@ -12,16 +12,34 @@ const splitLaunchesOnPages = (launches) => {
   return { pages, maxPages: pages.length };
 };
 
+const useLaunch = (flight_number) => {
+  const [launch, setLaunch] = useState({});
+  const getLaunchCallback = useCallback(async () => {
+    const data = await getLaunch(flight_number);
+    setLaunch(data);
+  }, [flight_number]);
+
+  useEffect(() => {
+    getLaunchCallback();
+  }, [getLaunchCallback]);
+
+  return { launch };
+};
+
 const useLaunches = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [launches, setLaunches] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [launchesStore, setLaunchesStore] = useState([]);
   const { pages, maxPages } = splitLaunchesOnPages(launches);
 
   const getLaunchesCallback = useCallback(async () => {
+    setLoading(true);
     const data = await getLaunches();
     setLaunches(data);
     setLaunchesStore(data);
+    setLoading(false);
+    
   }, []);
 
   useEffect(() => {
@@ -58,7 +76,11 @@ const useLaunches = () => {
     nextPage,
     previousPage,
     currentPage,
+    loading,
   };
 };
 
-export default useLaunches;
+export { 
+  useLaunches,
+  useLaunch
+};
